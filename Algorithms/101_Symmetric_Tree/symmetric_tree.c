@@ -7,17 +7,13 @@
  * };
  */
 
-bool depthSymTravel(struct TreeNode* left, struct TreeNode* right){
+bool depthSymTravel(struct TreeNode* p, struct TreeNode* q){
     bool ret;
-    if(left != NULL && right != NULL){
-        if(left->val != right->val)
-            return false;
-    }else if(left == NULL && right == NULL){
-        return true;
-    }else{
-        return false;
-    }
-    return (depthSymTravel(left->left, right->right) && depthSymTravel(left->right, right->left));
+    if (p == NULL && q == NULL) return true;
+    if (p == NULL || q == NULL) return false;
+    return p->val == q->val
+            && depthSymTravel(p->left, q->right)
+            && depthSymTravel(p->right, q->left);
 }
 
 bool isSymmetric(struct TreeNode* root) {

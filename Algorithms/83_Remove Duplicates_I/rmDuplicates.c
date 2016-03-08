@@ -5,6 +5,8 @@
  *     struct ListNode *next;
  * };
  */
+
+// 迭代版
 struct ListNode* deleteDuplicates(struct ListNode* head) {
     if (!head) return head;
     struct ListNode *cur = head;

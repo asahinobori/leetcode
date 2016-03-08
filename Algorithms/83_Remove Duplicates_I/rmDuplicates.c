@@ -10,9 +10,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head) {
     struct ListNode *cur = head;
     while (cur->next) {
         if (cur->val == cur->next->val) {
-            struct ListNode *temp = cur->next;
-            cur->next = temp->next;
-            cur = temp;
+            cur->next = cur->next->next;
         } else {
             cur = cur->next;
         }

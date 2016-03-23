@@ -7,21 +7,13 @@
  * };
  */
 
-int travel(struct TreeNode* root, int depth, int *pMinDepth) {
-    if (root == NULL) return 0;
-    depth++;
-    if (root->left == NULL && root->right == NULL) {
-        if (depth < *pMinDepth) {
-            *pMinDepth = depth;
-        }
-    }
-    travel(root->left, depth, pMinDepth);
-    travel(root->right, depth, pMinDepth);
-    return *pMinDepth;
+int travel(struct TreeNode* root, bool hasbrother) {
+    if (root == NULL) return hasbrother ? INT_MAX : 0;
+    int left = travel(root->left, root->right != NULL);
+    int right = travel(root->right, root->left != NULL);
+    return (left < right ? left : right) + 1;
 }
 
 int minDepth(struct TreeNode* root) {
-    int minDepth = INT_MAX;
-    return travel(root, 0, &minDepth);
+    return travel(root, false);
 }
-
